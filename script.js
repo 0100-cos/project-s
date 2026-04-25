@@ -245,30 +245,91 @@ function toggleHint() {
 }
 
 /* ──────────────────────────────
-   글자 폭발 → 리셋
+   글리치 붕괴 → 리셋
+   글자가 노이즈 문자로 교체되며 지직거리다가 리셋
    ────────────────────────────── */
+
+/* DOS/CRT 느낌의 노이즈 문자 풀 */
+const GLITCH_CHARS = "█▓▒░▄▀■□▪▫◘◙◦†‡§¶※⊕⊗⊘∅∇∆∏∑√∞∫≈≠≡≤≥⌂⌐¬ΩΣΦΨΛΞαβγδεζθλμπρσφψωЖФЦЧШЩЪЫЬЭЮЯ字文語数国際エラーエラー";
+
+function randomGlyphFrom(pool) {
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+/* 화면 전체 텍스트 노드를 수집 */
+function collectTextNodes(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+  });
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  return nodes;
+}
+
 function triggerGlitchReset() {
   const container = document.querySelector(".container");
-  const allText   = container.querySelectorAll(
-    ".title, .label, .hint-toggle, .pw-input, .dos-btn, .secret-text, .load-label, .hint-body"
-  );
 
-  /* 각 요소의 글자를 span으로 쪼개서 날려버리기 */
-  allText.forEach((el) => {
-    const original = el.textContent;
-    if (!original.trim()) return;
-    el.innerHTML = original.split("").map((ch) => {
-      const dx  = (Math.random() - 0.5) * 300;
-      const dy  = (Math.random() - 0.5) * 300;
-      const rot = (Math.random() - 0.5) * 720;
-      return `<span class="char-explode" style="--dx:${dx}px;--dy:${dy}px;--rot:${rot}deg">${ch === " " ? "&nbsp;" : ch}</span>`;
-    }).join("");
-  });
+  /* 1) 원본 텍스트 수집 */
+  const nodes = collectTextNodes(container);
+  const originals = nodes.map((n) => n.nodeValue);
 
-  /* 0.8초 후 페이지 전체 리로드 */
-  setTimeout(() => {
-    location.reload();
-  }, 900);
+  /* 총 글자 수 */
+  const totalChars = originals.reduce((s, t) => s + t.length, 0);
+
+  /* 2) 글리치 루프: 빠르게 랜덤 교체 반복 */
+  const TOTAL_MS   = 1800;  /* 전체 효과 시간 */
+  const TICK_MS    = 40;    /* 교체 주기 */
+  const ticks      = Math.floor(TOTAL_MS / TICK_MS);
+  let   tick       = 0;
+  /* 후반부로 갈수록 더 많은 글자가 무너짐 */
+
+  /* CSS로 화면 전체 흔들기 */
+  container.style.animation = "glitchShake 0.08s infinite";
+
+  /* 빨간 오류 색상 점진적 적용 */
+  container.style.transition = "color 0.3s";
+  setTimeout(() => { container.style.color = "#ff2200"; }, 100);
+  setTimeout(() => { container.style.color = "#ff6600"; }, 500);
+  setTimeout(() => { container.style.color = "#ff0000"; }, 900);
+
+  const iv = setInterval(() => {
+    tick++;
+    const corruptRatio = Math.min(1, (tick / ticks) * 1.4); /* 0→1 가속 */
+
+    nodes.forEach((node, ni) => {
+      const orig = originals[ni];
+      let result = "";
+      for (let ci = 0; ci < orig.length; ci++) {
+        const ch = orig[ci];
+        if (ch === " " || ch === "\n") { result += ch; continue; }
+        /* 후반부 글자일수록 먼저 붕괴 */
+        const posRatio = ci / orig.length;
+        const corruptChance = corruptRatio * (0.4 + posRatio * 0.6);
+        if (Math.random() < corruptChance) {
+          result += randomGlyphFrom(GLITCH_CHARS);
+        } else {
+          result += ch;
+        }
+      }
+      node.nodeValue = result;
+    });
+
+    /* 마지막 몇 틱: 완전 노이즈로 채우기 */
+    if (tick >= ticks - 4) {
+      nodes.forEach((node, ni) => {
+        const len = originals[ni].replace(/\s/g, "").length;
+        node.nodeValue = Array.from({ length: originals[ni].length }, (_, i) =>
+          /\s/.test(originals[ni][i]) ? originals[ni][i] : randomGlyphFrom(GLITCH_CHARS)
+        ).join("");
+      });
+    }
+
+    if (tick >= ticks) {
+      clearInterval(iv);
+      container.style.animation = "";
+      setTimeout(() => location.reload(), 120);
+    }
+  }, TICK_MS);
 }
 
 /* ──────────────────────────────
