@@ -88,7 +88,13 @@ body {
 .label { font-size: 20px; margin-bottom: 10px; }
 
 /* --- 인풋 --- */
-.input-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
 
 .pw-input {
   background: #000;
@@ -98,7 +104,8 @@ body {
   font-size: 22px;
   padding: 4px 10px;
   flex: 1;
-  max-width: 320px;
+  min-width: 0;
+  width: 100%;
   outline: none;
   caret-color: #00ff00;
 }
@@ -114,10 +121,24 @@ body {
   padding: 4px 16px;
   cursor: pointer;
   transition: background 0.1s, color 0.1s;
+  white-space: nowrap;
 }
 .dos-btn:hover { background: #00ff00; color: #000; }
 .dos-btn--error { color: #ff4444; border-color: #ff4444; }
 .dos-btn--error:hover { background: #ff4444; color: #000; }
+
+/* --- 모바일 대응 --- */
+@media (max-width: 480px) {
+  body { padding: 1rem; align-items: flex-start; padding-top: 2rem; }
+  .container { padding: 1.2rem; }
+  .title { font-size: 18px; letter-spacing: 1px; }
+  .title--journal { font-size: 16px; }
+  .input-wrap { flex-direction: column; align-items: stretch; }
+  .pw-input { max-width: 100%; font-size: 20px; }
+  .dos-btn { width: 100%; text-align: center; font-size: 20px; padding: 6px 16px; }
+  .chat-bubble-wrap { width: calc(100vw - 3rem); }
+  .modal-box { min-width: unset; width: calc(100vw - 3rem); padding: 1.2rem; }
+}
 
 /* --- 로딩 바 --- */
 .loading-bar { height: 14px; border: 1px solid #00ff00; background: #001500; margin-bottom: 8px; }
