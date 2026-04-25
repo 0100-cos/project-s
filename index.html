@@ -12,63 +12,94 @@
 
   <div class="scanline"></div>
 
-  <div class="container">
-
-    <div class="title">[ CLASSIFIED SYSTEM v1.0 ] ▓▒░</div>
-
-    <div class="label">C:\SYSTEM&gt; 패스워드를 입력하시오 :</div>
-
-    <div class="input-wrap">
-      <input
-        class="pw-input"
-        type="password"
-        id="pwInput"
-        placeholder="________"
-        autocomplete="off"
-      />
-      <button class="dos-btn" id="enterBtn">[ENTER]</button>
-    </div>
-
-    <!-- 비밀번호 성공 후 표시될 영역 -->
-    <div class="secret-content" id="secretContent">
-      <div class="loading-bar">
-        <div class="loading-fill" id="loadFill"></div>
+  <!-- ===================== 메인 화면 ===================== -->
+  <div class="screen" id="screenMain">
+    <div class="container">
+      <div class="title">[ CLASSIFIED SYSTEM v1.0 ] ▓▒░</div>
+      <div class="label" id="promptLabel">C:\SYSTEM&gt; 패스워드를 입력하시오 :</div>
+      <div class="input-wrap">
+        <input class="pw-input" type="password" id="pwInput" placeholder="________" autocomplete="off" />
+        <button class="dos-btn" id="enterBtn">[ENTER]</button>
       </div>
-      <div class="load-label" id="loadLabel">■ 정보 로딩 중...</div>
-      <pre class="secret-text" id="secretText"></pre>
-    </div>
 
-    <!-- 힌트 섹션 -->
-    <div class="hint-section">
-      <div class="hint-toggle" id="hintToggle">▶ [HINT] 힌트 보기</div>
-      <div class="hint-body" id="hintBody">
-        <span id="hintText"></span><span class="cursor" id="hintCursor"></span>
+      <!-- 비밀번호 성공 후 문서 출력 영역 -->
+      <div class="secret-content" id="secretContent">
+        <div class="loading-bar"><div class="loading-fill" id="loadFill"></div></div>
+        <div class="load-label" id="loadLabel">■ 정보 로딩 중...</div>
+        <pre class="secret-text" id="secretText"></pre>
+      </div>
+
+      <!-- 힌트 섹션 -->
+      <div class="hint-section">
+        <div class="hint-toggle" id="hintToggle">▶ [HINT] 힌트 보기</div>
+        <div class="hint-body" id="hintBody">
+          <span id="hintText"></span><span class="cursor" id="hintCursor"></span>
+        </div>
       </div>
     </div>
 
-  </div>
-
-  <!-- 성공 모달 -->
-  <div class="modal-overlay" id="modalOk">
-    <div class="modal-box">
-      <div class="modal-title">[ 접근 허가 ]</div>
-      <div class="modal-msg">
-        ✓ 정보 접근 권한 확인 완료<br />
-        <span class="modal-sub">C:\ACCESS&gt; GRANTED</span>
+    <!-- 최초 성공 모달 -->
+    <div class="modal-overlay" id="modalOk">
+      <div class="modal-box">
+        <div class="modal-title">[ 접근 허가 ]</div>
+        <div class="modal-msg">✓ 정보 접근 권한 확인 완료<br /><span class="modal-sub">C:\ACCESS&gt; GRANTED</span></div>
+        <button class="dos-btn" id="okBtn">[확인]</button>
       </div>
-      <button class="dos-btn" id="okBtn">[확인]</button>
     </div>
-  </div>
 
-  <!-- 오류 모달 -->
-  <div class="modal-overlay" id="modalErr">
-    <div class="modal-box modal-box--error">
-      <div class="modal-title modal-title--error">[ 오류 : ACCESS DENIED ]</div>
-      <div class="modal-msg modal-msg--error">
-        ✗ 패스워드 오류<br />
-        접근 권한이 없습니다.
+    <!-- 오류 모달 -->
+    <div class="modal-overlay" id="modalErr">
+      <div class="modal-box modal-box--error">
+        <div class="modal-title modal-title--error">[ 오류 : ACCESS DENIED ]</div>
+        <div class="modal-msg modal-msg--error">✗ 패스워드 오류<br />접근 권한이 없습니다.</div>
+        <button class="dos-btn dos-btn--error" id="closeErrBtn">[닫기]</button>
       </div>
-      <button class="dos-btn dos-btn--error" id="closeErrBtn">[닫기]</button>
+    </div>
+
+    <!-- 동일 패스워드 채팅 팝업 -->
+    <div class="modal-overlay" id="modalSame">
+      <div class="chat-bubble-wrap">
+        <div class="chat-header">
+          <span class="chat-status-dot"></span>
+          <span class="chat-name">UNKNOWN_USER_7749</span>
+        </div>
+        <div class="chat-body">
+          <div class="chat-msg" id="chatMsgSame"></div>
+          <span class="cursor" id="chatCursorSame"></span>
+        </div>
+        <div class="chat-footer">
+          <button class="chat-close-btn" id="closeSameBtn">[닫기]</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 신규 패스워드 경고 채팅 팝업 -->
+    <div class="modal-overlay" id="modalNewPw">
+      <div class="chat-bubble-wrap chat-bubble-wrap--warn">
+        <div class="chat-header">
+          <span class="chat-status-dot chat-status-dot--warn"></span>
+          <span class="chat-name">SYSTEM_WATCHER</span>
+        </div>
+        <div class="chat-body">
+          <div class="chat-msg" id="chatMsgNew"></div>
+          <span class="cursor" id="chatCursorNew"></span>
+        </div>
+        <div class="chat-footer chat-footer--warn" id="newPwFooter" style="display:none;">
+          <button class="chat-btn chat-btn--yes" id="newPwYes">[YES]</button>
+          <button class="chat-btn chat-btn--no" id="newPwNo">[NO]</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#screenMain -->
+
+  <!-- ===================== 숨겨진 일지 페이지 ===================== -->
+  <div class="screen" id="screenJournal" style="display:none;">
+    <div class="container container--journal">
+      <div class="title title--journal">[ 숨겨진 일지 :: LEVEL-2 CLEARANCE ] ▓▒░</div>
+      <div class="journal-meta">C:\JOURNAL&gt; 파일 복호화 완료 &nbsp;|&nbsp; 최종 수정 : [REDACTED]</div>
+      <pre class="journal-text" id="journalText"></pre>
+      <button class="dos-btn journal-back-btn" id="backBtn">[← 돌아가기]</button>
     </div>
   </div>
 
