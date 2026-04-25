@@ -121,7 +121,7 @@ function checkPassword() {
     if (value === CONFIG.password1) {
       showModal(modalOk);
     } else {
-      triggerGlitchReset();
+      showModal(modalErr);
     }
 
   } else {
