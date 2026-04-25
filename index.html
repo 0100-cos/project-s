@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLASSIFIED SYSTEM v1.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scanline"></div>
+
+  <div class="container">
+
+    <div class="title">[ CLASSIFIED SYSTEM v1.0 ] ▓▒░</div>
+
+    <div class="label">C:\SYSTEM&gt; 패스워드를 입력하시오 :</div>
+
+    <div class="input-wrap">
+      <input
+        class="pw-input"
+        type="password"
+        id="pwInput"
+        placeholder="________"
+        autocomplete="off"
+      />
+      <button class="dos-btn" id="enterBtn">[ENTER]</button>
+    </div>
+
+    <!-- 비밀번호 성공 후 표시될 영역 -->
+    <div class="secret-content" id="secretContent">
+      <div class="loading-bar">
+        <div class="loading-fill" id="loadFill"></div>
+      </div>
+      <div class="load-label" id="loadLabel">■ 정보 로딩 중...</div>
+      <pre class="secret-text" id="secretText"></pre>
+    </div>
+
+    <!-- 힌트 섹션 -->
+    <div class="hint-section">
+      <div class="hint-toggle" id="hintToggle">▶ [HINT] 힌트 보기</div>
+      <div class="hint-body" id="hintBody">
+        <span id="hintText"></span><span class="cursor" id="hintCursor"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 성공 모달 -->
+  <div class="modal-overlay" id="modalOk">
+    <div class="modal-box">
+      <div class="modal-title">[ 접근 허가 ]</div>
+      <div class="modal-msg">
+        ✓ 정보 접근 권한 확인 완료<br />
+        <span class="modal-sub">C:\ACCESS&gt; GRANTED</span>
+      </div>
+      <button class="dos-btn" id="okBtn">[확인]</button>
+    </div>
+  </div>
+
+  <!-- 오류 모달 -->
+  <div class="modal-overlay" id="modalErr">
+    <div class="modal-box modal-box--error">
+      <div class="modal-title modal-title--error">[ 오류 : ACCESS DENIED ]</div>
+      <div class="modal-msg modal-msg--error">
+        ✗ 패스워드 오류<br />
+        접근 권한이 없습니다.
+      </div>
+      <button class="dos-btn dos-btn--error" id="closeErrBtn">[닫기]</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

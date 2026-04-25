@@ -1,0 +1,270 @@
+/* ===========================
+   CLASSIFIED SYSTEM - style.css
+   레트로 DOS / Win98 테마
+   =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* --- 기본 리셋 --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- 배경 & 전체 --- */
+body {
+  background-color: #000;
+  color: #00ff00;
+  font-family: 'VT323', monospace;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* --- 스캔라인 오버레이 --- */
+.scanline {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  z-index: 999;
+}
+
+/* --- 메인 컨테이너 --- */
+.container {
+  width: 100%;
+  max-width: 680px;
+  border: 2px solid #00ff00;
+  padding: 2rem;
+  background: #000;
+  box-shadow:
+    0 0 0 6px #000,
+    0 0 0 8px #1a1a1a,
+    0 0 40px rgba(0, 255, 0, 0.15);
+}
+
+/* --- 제목 --- */
+.title {
+  font-size: 24px;
+  letter-spacing: 3px;
+  text-align: center;
+  border-bottom: 1px solid #00ff00;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+
+/* --- 라벨 --- */
+.label {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* --- 인풋 영역 --- */
+.input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pw-input {
+  background: #000;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  padding: 4px 10px;
+  flex: 1;
+  max-width: 320px;
+  outline: none;
+  caret-color: #00ff00;
+}
+
+.pw-input:focus {
+  background: #001500;
+}
+
+/* --- 버튼 공통 --- */
+.dos-btn {
+  background: #000;
+  color: #00ff00;
+  border: 1px solid #00ff00;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 4px 16px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.dos-btn:hover {
+  background: #00ff00;
+  color: #000;
+}
+
+/* 오류용 버튼 */
+.dos-btn--error {
+  color: #ff4444;
+  border-color: #ff4444;
+}
+
+.dos-btn--error:hover {
+  background: #ff4444;
+  color: #000;
+}
+
+/* --- 로딩 바 --- */
+.loading-bar {
+  height: 14px;
+  border: 1px solid #00ff00;
+  background: #001500;
+  margin-bottom: 8px;
+}
+
+.loading-fill {
+  height: 100%;
+  background: #00ff00;
+  width: 0%;
+  transition: width 0.05s linear;
+}
+
+.load-label {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #00cc00;
+}
+
+/* --- 비밀 내용 영역 --- */
+.secret-content {
+  display: none;
+  margin-top: 20px;
+  border-top: 1px dashed #00ff00;
+  padding-top: 16px;
+}
+
+.secret-content.show {
+  display: block;
+}
+
+.secret-text {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: #00ff00;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  margin-top: 8px;
+}
+
+/* --- 힌트 섹션 --- */
+.hint-section {
+  margin-top: 24px;
+  border-top: 1px dashed #007700;
+  padding-top: 14px;
+}
+
+.hint-toggle {
+  font-size: 20px;
+  color: #00cc00;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.1s;
+}
+
+.hint-toggle:hover {
+  color: #00ff00;
+}
+
+.hint-body {
+  display: none;
+  margin-top: 10px;
+  font-size: 18px;
+  color: #00cc00;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.hint-body.open {
+  display: block;
+}
+
+/* --- 커서 깜빡임 --- */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background: #00ff00;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* --- 모달 오버레이 --- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.88);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+/* --- 모달 박스 --- */
+.modal-box {
+  background: #000;
+  border: 2px solid #00ff00;
+  padding: 2rem;
+  text-align: center;
+  min-width: 280px;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+.modal-box--error {
+  border-color: #ff4444;
+  box-shadow: 0 0 30px rgba(255, 68, 68, 0.3);
+}
+
+.modal-title {
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #00ff00;
+  padding-bottom: 10px;
+}
+
+.modal-title--error {
+  color: #ff4444;
+  border-bottom-color: #ff4444;
+}
+
+.modal-msg {
+  font-size: 20px;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.modal-msg--error {
+  color: #ff4444;
+}
+
+.modal-sub {
+  font-size: 16px;
+  color: #00aa00;
+}
