@@ -284,8 +284,68 @@ body {
 .chat-btn--no:hover { border-color: #888; color: #aaa; }
 
 /* ============================================
-   글리치 화면 흔들림 (오류 시)
+   이스터에그 토스트 알림
    ============================================ */
+.easter-toast {
+  position: fixed;
+  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 450px;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-family: 'VT323', monospace;
+  z-index: 500;
+  cursor: pointer;
+  transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.easter-toast.show {
+  bottom: 1.5rem;
+}
+.easter-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #00cc00;
+  flex-shrink: 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.easter-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+.easter-from {
+  font-size: 14px;
+  color: #555;
+  letter-spacing: 1px;
+}
+.easter-msg {
+  font-size: 18px;
+  color: #aaa;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}
+.easter-close {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 2px;
+  flex-shrink: 0;
+  font-family: sans-serif;
+}
+.easter-close:hover { color: #666; }
 @keyframes glitchShake {
   0%   { transform: translate(0, 0); }
   20%  { transform: translate(-3px, 1px); }

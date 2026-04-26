@@ -1,113 +1,173 @@
 /* ===========================
-   game.css — 갤러그 패스워드 페이지 전용
+   game.css v2
    =========================== */
 
-/* ── 게임 모달 전체 ── */
+/* ── 게임 모달 ── */
 .game-modal {
   display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.97);
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,.97);
   z-index: 100;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center; justify-content: center;
 }
 .game-modal.show { display: flex; }
 
-/* ── 게임 내부 레이아웃 ── */
 .game-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 1rem;
-  width: 100%;
-  max-width: 420px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; padding: 1rem; width: 100%; max-width: 420px;
 }
 
 .game-header {
-  font-size: 16px;
-  color: #00aa00;
-  letter-spacing: 1px;
-  text-align: center;
-  margin-bottom: 4px;
+  font-size: 15px; color: #00aa00;
+  letter-spacing: 1px; text-align: center;
 }
 
-/* ── TARGET 슬롯 표시 ── */
-.game-target {
-  font-size: 20px;
-  color: #555;
-  letter-spacing: 2px;
+/* ── 슬롯 7칸 ── */
+.slot-row {
+  display: flex; gap: 6px; justify-content: center;
+  margin: 4px 0;
 }
-.target-slot {
-  display: inline-block;
-  width: 24px;
-  text-align: center;
-  border-bottom: 1px solid #444;
-  margin: 0 3px;
-  color: #333;
+.slot {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 44px;
+  border-bottom: 2px solid #005500;
+  font-size: 28px; color: #003300;
+  transition: color .15s, border-color .15s;
 }
-.target-slot.filled {
+.slot.filled {
   color: #00ff00;
   border-bottom-color: #00ff00;
 }
 
-/* ── INPUT 표시 ── */
-.game-input-row {
-  font-size: 24px;
-  color: #00ff00;
-  letter-spacing: 4px;
-  min-height: 34px;
-  border-bottom: 1px solid #00ff00;
-  padding-bottom: 4px;
-  width: 100%;
-  max-width: 360px;
-  text-align: left;
-}
-.game-input-label { color: #006600; font-size: 18px; margin-right: 8px; }
-.game-input-letters { color: #00ff00; }
-
 /* ── 캔버스 ── */
-#gameCanvas {
-  border: 1px solid #003300;
-  background: #000;
-  display: block;
-  max-width: 100%;
-}
+#gameCanvas { border: 1px solid #002200; background:#000; display:block; max-width:100%; }
 
 /* ── 조작 안내 ── */
-.game-controls {
-  font-size: 15px;
-  color: #334433;
+.game-controls { font-size:14px; color:#334433; text-align:center; }
+.mobile-hint { display:none; }
+@media (hover:none) { .mobile-hint { display:inline; } }
+
+.game-msg { font-size:17px; color:#ff4444; min-height:22px; text-align:center; }
+
+/* ──────────────────────────────
+   글리치 오버레이 (실패)
+   ────────────────────────────── */
+.glitch-overlay {
+  display: none;
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: #000; z-index:200;
+  align-items: center; justify-content: center;
+  flex-direction: column;
+}
+
+.glitch-content {
+  width: 100%; max-width: 480px; padding: 2rem;
   text-align: center;
 }
 
-/* ── 오류 메시지 ── */
-.game-msg {
-  font-size: 18px;
-  color: #ff4444;
-  min-height: 24px;
-  text-align: center;
+.glitch-title {
+  font-size: 22px; color: #ff2200; letter-spacing: 2px;
+  margin-bottom: 16px; animation: gFlicker .15s infinite;
+}
+@keyframes gFlicker { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+.glitch-lines {
+  font-size: 16px; color: #ff0000; line-height: 1.5;
+  text-align: left; margin-bottom: 20px;
+  font-family: 'VT323', monospace;
+  word-break: break-all;
+  opacity: .8;
 }
 
-.game-footer { margin-top: 4px; }
-
-/* ── 성공 모달 내 비밀 텍스트 ── */
-#modalSuccess .modal-box {
-  max-width: 500px;
-  width: calc(100vw - 3rem);
-  text-align: left;
+/* 게임오버 팝업 */
+.gameover-popup {
+  display: none;
+  border: 2px solid #ff4444;
+  padding: 1.5rem 2rem;
+  background: #000;
+  animation: popIn .2s ease-out;
 }
-#modalSuccess .modal-title,
-#modalSuccess .modal-msg {
-  text-align: center;
+.gameover-popup.show { display: block; }
+@keyframes popIn { from{transform:scale(.9);opacity:0} to{transform:scale(1);opacity:1} }
+
+.gameover-title {
+  font-size: 22px; color: #ff4444; letter-spacing: 2px;
+  border-bottom: 1px solid #ff4444; padding-bottom: 10px; margin-bottom: 12px;
+}
+.gameover-msg { font-size:19px; color:#ff4444; line-height:1.7; margin-bottom:16px; }
+
+/* ──────────────────────────────
+   메신저 팝업 (성공)
+   ────────────────────────────── */
+.messenger-overlay {
+  display: none;
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,.96); z-index:200;
+  align-items: center; justify-content: center;
+}
+.messenger-overlay.show { display: flex; }
+
+.messenger-wrap {
+  width: 100%; max-width: 380px;
+  border: 1px solid #222; background: #0a0a0a;
+  display: flex; flex-direction: column;
+  max-height: 90vh;
+  animation: popIn .2s ease-out;
+}
+
+.messenger-header {
+  display: flex; align-items: center; gap: 8px;
+  background: #0f0f0f; border-bottom: 1px solid #1a1a1a;
+  padding: 10px 14px;
+}
+.messenger-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #00cc00; animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.messenger-title { font-size: 16px; color: #666; flex: 1; letter-spacing: 1px; }
+.messenger-status { font-size: 13px; color: #ff4444; animation: gFlicker .8s infinite; }
+
+.messenger-body {
+  flex: 1; overflow-y: auto; padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  min-height: 280px;
+}
+
+/* 메시지 행 */
+.msg-row { display: flex; flex-direction: column; gap: 2px; animation: msgFadeIn .3s ease-out; }
+@keyframes msgFadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+.msg-row--a { align-items: flex-start; }
+.msg-row--b { align-items: flex-end; }
+.msg-row--sys { align-items: center; }
+
+.msg-name { font-size: 13px; color: #444; margin-bottom: 2px; }
+
+.msg-bubble {
+  font-size: 18px; line-height: 1.5;
+  padding: 6px 12px;
+  max-width: 80%;
+  white-space: pre-wrap;
+}
+.msg-row--a .msg-bubble { background: #111; color: #aaa; border-left: 2px solid #333; }
+.msg-row--b .msg-bubble { background: #0d1a0d; color: #88bb88; border-right: 2px solid #336633; }
+
+.msg-sys { font-size: 15px; color: #444; font-style: italic; }
+
+/* 삭제 애니메이션 */
+.msg-deleting {
+  animation: msgDelete .4s ease-out forwards;
+}
+@keyframes msgDelete {
+  0%  { opacity:1; transform:translateX(0); color: #ff4444; }
+  40% { opacity:.5; transform:translateX(8px); }
+  100%{ opacity:0; transform:translateX(-20px); }
 }
 
 /* ── 모바일 ── */
 @media (max-width: 440px) {
-  .game-header { font-size: 13px; letter-spacing: 0; }
-  .game-target  { font-size: 16px; }
-  .game-input-row { font-size: 20px; }
+  .game-header { font-size:13px; }
+  .slot { width:30px; height:38px; font-size:24px; }
+  .messenger-wrap { max-height:100vh; border:none; }
 }

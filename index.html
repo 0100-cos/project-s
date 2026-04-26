@@ -4,6 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CLASSIFIED SYSTEM v1.0</title>
+
+  <!-- ★ SNS 미리보기 OG 태그 — 아래 내용을 원하는 대로 수정하세요 ★ -->
+  <meta property="og:title"       content="CLASSIFIED SYSTEM v1.0" />
+  <meta property="og:description" content="접근 권한이 있는 자만 열람 가능합니다." />
+  <meta property="og:image"       content="https://your-site.netlify.app/preview.png" />
+  <meta property="og:url"         content="https://your-site.netlify.app" />
+  <meta property="og:type"        content="website" />
+
+  <!-- 트위터(X) 카드 -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="CLASSIFIED SYSTEM v1.0" />
+  <meta name="twitter:description" content="접근 권한이 있는 자만 열람 가능합니다." />
+  <meta name="twitter:image"       content="https://your-site.netlify.app/preview.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -61,7 +75,7 @@
       <div class="chat-bubble-wrap">
         <div class="chat-header">
           <span class="chat-status-dot"></span>
-          <span class="chat-name">UNKNOWN_USER_7749</span>
+          <span class="chat-name">UNKNOWN_USER_0100</span>
         </div>
         <div class="chat-body">
           <div class="chat-msg" id="chatMsgSame"></div>
@@ -96,11 +110,21 @@
   <!-- ===================== 숨겨진 일지 페이지 ===================== -->
   <div class="screen" id="screenJournal" style="display:none;">
     <div class="container container--journal">
-      <div class="title title--journal">[ 숨겨진 일지 :: LEVEL-2 CLEARANCE ] ▓▒░</div>
+      <div class="title title--journal">[ 이▓▓ 연구원 일지 :: LEVEL-2 CLEARANCE ] ▓▒░</div>
       <div class="journal-meta">C:\JOURNAL&gt; 파일 복호화 완료 &nbsp;|&nbsp; 최종 수정 : [REDACTED]</div>
       <pre class="journal-text" id="journalText"></pre>
       <button class="dos-btn journal-back-btn" id="backBtn">[← 돌아가기]</button>
     </div>
+  </div>
+
+  <!-- ===================== 이스터에그 토스트 알림 ===================== -->
+  <div id="easterToast" class="easter-toast">
+    <div class="easter-dot"></div>
+    <div class="easter-text">
+      <span class="easter-from">UNKNOWN_USER_0100</span>
+      <span class="easter-msg" id="easterMsg"></span>
+    </div>
+    <button class="easter-close" id="easterClose">✕</button>
   </div>
 
   <script src="script.js"></script>

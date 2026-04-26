@@ -10,28 +10,30 @@ const CONFIG = {
   password1: "penguin",
 
   /* 2차 비밀번호 (문서 해제 후 입력 시 숨겨진 일지 진입) */
-  password2: "solomon",
+  password2: "collapse",
 
   /* 힌트 */
   hintText: [
-    " 1: 아무것도 없는 광활한 대지를 두발로 걷는 것.",
-    " 2: 곧잘 넘어져도 일어서는 것.",
-    " 3: 함께의 가치를 무엇보다 잘 아는 것."
+    "그건 아무것도 없는 광활한 대지를 두 발로 걸었지.",
+    "미련하게도 수차례 넘어지고 일어났지.",
+    "세상은 가혹했고, 그것은 결코 홀로 살아남지 못할거야.",
   ].join("\n"),
 
   /* 1차 비밀번호 성공 후 출력될 문서 내용 */
   secretText: [
-    "▓▒░ Project_S::활성화 ░▒▓",
+    "▓▒░ Project_S::Azathoth ░▒▓",
     "",
-    "프로젝트 솔로몬.\n고차원적 존재의 힘을 빌려 괴담으로부터 안전한 세상을 만들 초석을 다지기로 하였다.\n고차원적 존재인 만큼 착한친구 같은 단순 필터링방식으로는 위험이 크다.\n여러 개체로 나누어서 계약자에게 우호적이며 현명한 인격을 덮어 씌우는 방식으로 추진.",
-    "날짜 : [202x-0x-xx]",
+    "프로젝트 솔로몬.\n고차원의 존재의 힘을 빌려 괴담으로부터 안전한 세상을 만들 초석을 다지기로 하였다.\n초월적 존재, 우주의 근간이라 여겨지는 만큼\n착한친구 같은 단순한 필터링방식으로는 위험이 크다.\n여러 개체로 나누어서 계약자에게 우호적이며 현명한 인격을 덮어 씌우는 방식으로 추진.",
+    "날짜 : [201x-0x-xx]",
     "작성자 : 해당연구는 연구원의 안전을 위해 무기명으로 진행된다.",
     "",
-    "C:\\SECRET>solomon_"
+    "<comment>이제와서 하는 말이지만, 현명한 조력자를 얻기 위해 아둔한 혼돈을 깨우는건 바보같다고 생각해요.",
+    "",
+    "C:\\SECRET>solomon_01>collapse"
   ].join("\n"),
 
   /* 동일 패스워드 입력 시 채팅 메시지 */
-  samePwMsg: "반복되는건\n당신 뿐.\n새로운 변수에 대한 갈망은 연구원의 소양이죠.",
+  samePwMsg: "지루하게\n반복되는 건\n당신 뿐.\n새로운 변수에 대한 갈망은 연구원의 소양이죠.",
 
   /* 2차 패스워드 입력 시 경고 채팅 메시지 */
   newPwWarningMsg: "호기심은 고양이를 죽인다 하던가요?\n\n어차피,\n상자 속 고양이는\n살았지만 죽어있고,\n이제 선택은 당신의 몫이에요.",
@@ -41,7 +43,7 @@ const CONFIG = {
     "[ 일지 #001 ] 날짜 : [DATA EXPUNGED]",
     "",
     "프로젝트 진행은 순조롭다.",
-    "우리가 접촉하고자 하는 존재는 너무나 거대하여 \n직접적으로 도움을 요청하는 경우, 분명 감당하기 힘든 일이 발생할 것이다. \n그러니 세계의 영향을 끼치지 않고 조언을 구하는 형태로 영향을 최소화하기로 하였다.",
+    "우리가 접촉하고자 하는 존재는 너무나 거대하여\n직접적으로 도움을 요청하는 경우, 분명 감당하기 힘든 일이 발생할 것이다. \n그러니 세계의 직접 개입시키지 않고 조언을 구하는 형태로 영향을 최소화하기로 하였다.",
     "",
     "[ 일지 #002 ] 날짜 : [DATA EXPUNGED]",
     "",
@@ -52,15 +54,16 @@ const CONFIG = {
     "",
     "[ 일지 #??? ] ...",
     "프로젝트는 중단되었다. 이미 시판 된 키트를 빨리 회수하기 위해 모두가 고군분투한다.",
-    "우리의 기술력으로는 통제 가능한 수준의 위험도가 아니었다.",
+    "연구소의 기술력으로는 통제 가능한 수준의 위험도가 아니었다.",
     "잠든 그것의 파편을 솔로몬으로 만들기 위해",
-    "우리가 알지 못하는 현명한 누군가가 희생되어야했다. 안전핀처럼.",
+    "넓은 우주, 어딘가에 있을 현명한 누군가는 희생되어야했다. 안전핀처럼.",
     "이 귀여운 펭귄인형 키트는 전부 처분되겠지.",
-    "대를 위해 소를 희생할 순 없는 노릇아닌가.",
+    "대를 위해 소를 희생할 순 없는 노릇이니까.",
     "물론 내 서랍 안, 간식과 섞여있는 프로토타입은 반납하지 않을 것이다.",
-    "괜찮다. 나는 알고 있으니까",
+    "보통 영화에서도 이런게 나중에 큰 사건을 -좋든 나쁘든 이야기를 진행하는 것-\n만들어주지 않던가!",
+    "거기다 나는 알고 있으니까",
     "이 인형에 솜으로 전락할 안타까운 희생자가 누군지.",
-    "사실,",
+    "정확히 말하면,",
     "내가 누구였는지는 기억은 안나지만",
     "...",
     "무지한 당신의 실수인 동시에",
@@ -353,7 +356,7 @@ function triggerGlitchReset() {
 /* ──────────────────────────────
    타이핑 효과 (공통)
    ────────────────────────────── */
-function typeText(element, text, onComplete = null, delay = 32) {
+function typeText(element, text, onComplete = null, delay = 45) {
   let i = 0;
   element.textContent = "";
   const iv = setInterval(() => {
@@ -366,3 +369,74 @@ function typeText(element, text, onComplete = null, delay = 32) {
     }
   }, delay);
 }
+
+/* ──────────────────────────────
+   이스터에그 토스트 알림
+   페이지 로드 후 일정 시간이 지나면
+   하단에 슬쩍 올라오는 메신저 알림
+   클릭하면 game.html로 이동
+   ────────────────────────────── */
+(function initEasterEgg() {
+  const toast    = document.getElementById("easterToast");
+  const msgEl    = document.getElementById("easterMsg");
+  const closeBtn = document.getElementById("easterClose");
+  if (!toast) return;
+
+  /* 토스트에 표시될 메시지 목록 — 원하는 대로 수정하세요 */
+  const EASTER_MESSAGES = [
+    "<System>Unknown:C",
+    "<전자회로의 우주를 넘어, 누군가 당신을 지켜보고 있다>",
+    "어라, 당신도 여기 있군요.",
+    "제가 기다리던 사람은 아니지만.",
+    "이 광활한 우주에서 모처럼 만났으니까요.",
+    "전부 다 보고 심심하면 놀러와요.",
+  ];
+
+  let msgIndex = 0;
+  let toastTimer = null;
+  let shown = false;
+
+  /* 메시지를 순서대로 타이핑 출력 */
+  function showNextMsg() {
+    if (msgIndex >= EASTER_MESSAGES.length) return;
+    msgEl.textContent = "";
+    const text = EASTER_MESSAGES[msgIndex++];
+    let i = 0;
+    const iv = setInterval(() => {
+      if (i < text.length) { msgEl.textContent += text[i++]; }
+      else {
+        clearInterval(iv);
+        /* 마지막 메시지면 클릭 유도 스타일 적용 */
+        if (msgIndex >= EASTER_MESSAGES.length) {
+          toast.style.borderColor = "#446644";
+          msgEl.style.color = "#8c62b9";
+        } else {
+          /* 다음 메시지로 */
+          toastTimer = setTimeout(showNextMsg, 3200);
+        }
+      }
+    }, 36);
+  }
+
+  /* 페이지 로드 후 8초 뒤 첫 등장 */
+  setTimeout(() => {
+    if (shown) return;
+    shown = true;
+    toast.classList.add("show");
+    setTimeout(showNextMsg, 400);
+  }, 8000);
+
+  /* 토스트 클릭 → game.html 이동 */
+  toast.addEventListener("click", (e) => {
+    if (e.target === closeBtn) return;
+    window.location.href = "game.html";
+  });
+
+  /* 닫기 버튼 */
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    clearTimeout(toastTimer);
+    toast.classList.remove("show");
+  });
+})();
+
