@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLASSIFIED SYSTEM :: SECTOR-2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="game.css" />
+</head>
+<body>
+
+  <div class="scanline"></div>
+
+  <!-- ── 메인 화면 ── -->
+  <div class="screen" id="screenMain">
+    <div class="container">
+      <div class="title">[ CLASSIFIED SYSTEM :: SECTOR-2 ] ▓▒░</div>
+      <div class="label">C:\SYSTEM&gt; 기밀 문서 접근 요청 감지됨.</div>
+      <div class="label" style="color:#00aa00;margin-bottom:20px;">보안 등급 상향. 패스워드 입력 방식이 변경되었습니다.</div>
+      <button class="dos-btn" id="startBtn">[ 패스워드 입력 시작 ]</button>
+      <div class="hint-section">
+        <div class="hint-toggle" id="hintToggle">▶ [HINT] 힌트 보기</div>
+        <div class="hint-body" id="hintBody">
+          <span id="hintText"></span><span class="cursor" id="hintCursor"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 게임 모달 ── -->
+  <div id="gameModal" class="game-modal">
+    <div class="game-wrap">
+      <div class="game-header">
+        ▓ 떨어지는 알파벳을 쏘아 패스워드를 완성하라 ▓
+      </div>
+      <div class="game-target">TARGET :
+        <span id="targetSlots"></span>
+      </div>
+      <div class="game-input-row">
+        <span class="game-input-label">INPUT &gt;</span>
+        <span id="inputLetters" class="game-input-letters"></span>
+        <span class="cursor"></span>
+      </div>
+      <canvas id="gameCanvas"></canvas>
+      <div class="game-controls">
+        ← → 이동 &nbsp;|&nbsp; SPACE 발사 &nbsp;|&nbsp; 모바일: 화면 터치
+      </div>
+      <div id="gameMsg" class="game-msg"></div>
+      <div class="game-footer">
+        <button class="dos-btn dos-btn--error" id="cancelBtn">[ ESC ] 취소</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 성공 모달 ── -->
+  <div class="modal-overlay" id="modalSuccess">
+    <div class="modal-box">
+      <div class="modal-title">[ 접근 허가 ]</div>
+      <div class="modal-msg">
+        ✓ 정보 접근 권한 확인 완료<br />
+        <span class="modal-sub">C:\ACCESS&gt; GRANTED</span>
+      </div>
+      <pre class="secret-text" id="secretText" style="text-align:left;margin-top:14px;"></pre>
+      <button class="dos-btn" id="okBtn" style="margin-top:16px;">[확인]</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
